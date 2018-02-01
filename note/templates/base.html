@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Index{% endblock %}</title>
+</head>
+<body>
+<div class="header">
+    <h2 class="title">{% block test %}Welcome{% endblock %}</h2>
+</div>
+{% if user.is_active %}
+    <a href="{%url 'logout' %}">Logout</a>
+    {% block content %}
+    {% endblock %}
+{% else %}
+  <a href="{%url 'login' %}">Login</a>
+{% endif %}
+</body>
+</html>

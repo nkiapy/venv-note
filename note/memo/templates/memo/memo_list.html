@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>Memos</h1>
+<ul>
+    {% for memo in object_list %}
+    <li>{{ memo.title }}  :
+    <a href="{% url "memo_edit" memo.id %}">[edit]<!--{{ memo.title }}--></a>
+    <a href="{% url "memo_delete" memo.id %}">[delete]</a>
+    </li>
+    {% endfor %}
+</ul>
+
+<a href="{% url "memo_new" %}">New</a>
+
+</body>
+</html>

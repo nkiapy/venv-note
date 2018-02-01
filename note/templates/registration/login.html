@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Form</title>
+</head>
+<body>
+<div>
+    <h1>Login Form</h1>
+    <form method="POST" action="{% url 'login' %}">{% csrf_token %}
+        <div class="container">
+            <label><b>User ID</b></label>
+            <input type="text" placeholder="Enter Username" name="{{ form.username.html_name }}" required>
+
+            <label><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="{{ form.password.html_name }}" required>
+
+            <button type="submit">Login</button>
+            <input type="hidden" name="next" value="{{ next }}" />
+            <!--<input type="checkbox" checked="checked"> Remember me-->
+        </div>
+    </form>
+</div>
+</body>
+</html>
