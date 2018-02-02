@@ -1,7 +1,5 @@
 ### 사전작업
 - python3.6 설치
-- mongoDB(3.6.0) 설치
-> db.articles.insert({title:'Hello world'})
 
 ## Getting Started
 
@@ -10,7 +8,7 @@
 git clone it once globally:
 
 ```sh
-git clone https://github.com/elle510/venv-note.git
+git clone https://github.com/nkiapy/venv-note.git
 ```
 
 ### virtualenv 생성
