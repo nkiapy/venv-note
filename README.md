@@ -33,6 +33,7 @@ pip install -r requirements.txt
 ### Run Server
 
 ```sh
+cd note
 python manage.py runserver
 ```
 
