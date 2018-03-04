@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
+{% extends "memo/base.html" %}
+<!--{% block title %}Memo{% endblock %}-->
+{% block header %}메모장{% endblock %}
+{% block content %}
 <h1>Memos</h1>
 <ul>
     {% for memo in object_list %}
@@ -17,6 +13,4 @@
 </ul>
 
 <a href="{% url "memo_new" %}">New</a>
-
-</body>
-</html>
+{% endblock content %}

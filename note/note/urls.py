@@ -16,11 +16,20 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
+from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token, verify_jwt_token
+
 from .views import HomeView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', HomeView.as_view(), name='home'),
-    url(r'^accounts/', include('django.contrib.auth.urls')),
+    # django 기본인증
+    # url(r'^accounts/', include('django.contrib.auth.urls')),
+    url(r'^accounts/', include('accounts.urls')),
+    # url(r'^auth/', include('auth_jwt.urls')), api 호출 하다 말았음
     url(r'^memo/', include('memo.urls')),
+
+    url(r'^api-token-auth/', obtain_jwt_token),
+    url(r'^api-token-refresh/', refresh_jwt_token),
+    url(r'^api-token-verify/', verify_jwt_token),
 ]

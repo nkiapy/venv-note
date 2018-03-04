@@ -6,14 +6,15 @@
 </head>
 <body>
 <div class="header">
-    <h2 class="title">{% block test %}Welcome{% endblock %}</h2>
+    <h2 class="title">{% block header %}Welcome{% endblock %}</h2>
 </div>
 {% if user.is_active %}
     <a href="{%url 'logout' %}">Logout</a>
     {% block content %}
     {% endblock %}
 {% else %}
-  <a href="{%url 'login' %}">Login</a>
+    <a href="{%url 'login' %}">Login</a>
+    <a href="{%url 'join' %}">회원가입</a>
 {% endif %}
 </body>
 </html>
