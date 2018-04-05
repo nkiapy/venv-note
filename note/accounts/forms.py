@@ -14,13 +14,21 @@ class UserRegisterForm(forms.ModelForm):
     # email2 = forms.EmailField(label='Confirm Email')
     password = forms.CharField(widget=forms.PasswordInput)
 
+    Choices = [
+        ('1', 'PostgreSQL'),
+        ('2', 'MongoDB'),
+        ('3', 'Cassandra')
+    ]
+    db = forms.ChoiceField(widget=forms.Select, choices=Choices)
+
     class Meta:
         model = User
         fields = [
             'username',
             'email',
             # 'email2',
-            'password'
+            'password',
+            'db'
         ]
 
     # def clean(self, *args, **kwargs):
