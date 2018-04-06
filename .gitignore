@@ -13,3 +13,4 @@ note/memo/migrations/__pycache__
 note/accounts/__pycache__
 note/accounts/migrations/__pycache__
 note/auth_jwt/__pycache__
+note/auth_jwt/migrations/__pycache__
