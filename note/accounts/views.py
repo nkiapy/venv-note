@@ -7,26 +7,28 @@ from django.contrib.auth import (
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
-from .forms import UserLoginForm, UserRegisterForm
+from .forms import UserLoginForm, UserRegisterForm, ProfileForm
 
 # Create your views here.
 
 def register_view(request):
     print(request.user.is_authenticated())
     next = request.GET.get('next')
-    form = UserRegisterForm(request.POST or None)
-    if form.is_valid():
-        user = form.save(commit=False)
-        password = form.cleaned_data.get('password')
+    user_form = UserRegisterForm(request.POST or None)
+    profile_form = ProfileForm(request.POST or None)
+    if user_form.is_valid() and profile_form.is_valid():
+        user = user_form.save(commit=False)
+        password = user_form.cleaned_data.get('password')
         user.set_password(password)
         user.save()
+        # profile_form.save(commit=False)
         new_user = authenticate(username=user.username, password=password)
         login(request, new_user)
         if next:
             return redirect(next)
         return redirect("/")
 
-    return render(request, "accounts/join.html", {'form': form})
+    return render(request, "accounts/join.html", {'user_form': user_form, 'profile_form': profile_form})
 
 
 

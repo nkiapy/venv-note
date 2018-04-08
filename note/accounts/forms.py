@@ -1,25 +1,19 @@
 from django import forms
-# from django.contrib.auth.models import User
+from django.contrib.auth.models import User
 from django.contrib.auth import (
     authenticate,
     get_user_model,
     login,
     logout,
 )
+from .models import Profile
 
-User = get_user_model()
+# User = get_user_model()
 
 class UserRegisterForm(forms.ModelForm):
     email = forms.EmailField(label='Email address')
     # email2 = forms.EmailField(label='Confirm Email')
     password = forms.CharField(widget=forms.PasswordInput)
-
-    Choices = [
-        ('1', 'PostgreSQL'),
-        ('2', 'MongoDB'),
-        ('3', 'Cassandra')
-    ]
-    db = forms.ChoiceField(widget=forms.Select, choices=Choices)
 
     class Meta:
         model = User
@@ -28,7 +22,6 @@ class UserRegisterForm(forms.ModelForm):
             'email',
             # 'email2',
             'password',
-            'db'
         ]
 
     # def clean(self, *args, **kwargs):
@@ -59,6 +52,17 @@ class UserRegisterForm(forms.ModelForm):
             raise forms.ValidationError("This username has already been registered")
         return username
 
+class ProfileForm(forms.ModelForm):
+    Choices = [
+        ('1', 'PostgreSQL'),
+        ('2', 'MongoDB'),
+        ('3', 'Cassandra')
+    ]
+    db = forms.ChoiceField(widget=forms.Select, choices=Choices)
+
+    class Meta:
+        model = Profile
+        fields = ['db']
 
 class UserLoginForm(forms.Form):
     username = forms.CharField()
