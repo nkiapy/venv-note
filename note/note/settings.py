@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 # import datetime
 import os
+from cassandra import ConsistencyLevel
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -34,6 +35,7 @@ INSTALLED_APPS = [
     # 'auth_jwt',
     'accounts',
     'memo.apps.MemoConfig',
+    'django_cassandra_engine',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -148,6 +150,25 @@ DATABASES = {
         'PASSWORD': '1234qwer',
         'HOST': 'postgres.ctixxtxpwhb8.us-east-2.rds.amazonaws.com',
         'PORT': '5432',
+    }
+    ,'cassandra': {
+        'ENGINE': 'django_cassandra_engine',
+        'NAME': 'demo',
+        'TEST_NAME': 'test_demo',
+        'HOST': '192.168.56.100',
+        'OPTIONS': {
+            'replication': {
+                'strategy_class': 'SimpleStrategy',
+                'replication_factor': 1,
+                        },
+            'connection': {
+                'retry_connect': True,
+                'consistency': ConsistencyLevel.ALL
+                        },
+            'session': {
+                'default_timeout': 15
+                        }
+                 }
     }
 }
 

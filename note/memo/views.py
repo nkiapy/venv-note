@@ -3,6 +3,9 @@ from .models import Test, Memo
 
 from django.forms import ModelForm
 
+from django.db import connections
+from django.utils import timezone
+from .models import AclUser
 # Create your views here.
 
 
@@ -57,6 +60,17 @@ def memo_list(request, template_name='memo/memo_list.html'):
 
 def memo_create(request, template_name='memo/memo_form.html'):
     form = MemoForm(request.POST or None)
+    db_cursor = connections['cassandra'].cursor()
+    totalcount = db_cursor.execute("select count(id) as totalcount from acl_user")
+    print(totalcount[0]['totalcount'])
+
+    AclUser.create(
+        id="aaa"
+        , name="bbb"
+        , email=""
+        , create_date=timezone.now()
+    )
+
     if form.is_valid():
         form.save()
         return redirect('memo_list')
