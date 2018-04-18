@@ -33,9 +33,9 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     # 'auth_jwt',
-    'accounts',
-    'memo.apps.MemoConfig',
     'django_cassandra_engine',
+    'accounts',
+    'memo',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -155,7 +155,7 @@ DATABASES = {
         'ENGINE': 'django_cassandra_engine',
         'NAME': 'demo',
         'TEST_NAME': 'test_demo',
-        'HOST': '192.168.56.100',
+        'HOST': 'ec2-18-217-20-127.us-east-2.compute.amazonaws.com',
         'OPTIONS': {
             'replication': {
                 'strategy_class': 'SimpleStrategy',
